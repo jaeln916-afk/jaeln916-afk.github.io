@@ -597,3 +597,15 @@
 
   .wa-float { width: 52px; height: 52px; bottom: 1.2rem; right: 1.2rem; }
 }
+@media (max-width: 900px) {
+  .social-rail {
+    display: flex !important;
+    position: fixed;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 150;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
