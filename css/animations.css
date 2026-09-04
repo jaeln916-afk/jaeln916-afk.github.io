@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Talleres Juma — animations.css
+   Keyframes y transiciones de estado (reveal, marquee, nav móvil)
+   ========================================================================== */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
+.service-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
+.service-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
+.service-grid .reveal:nth-child(5) { transition-delay: 0.24s; }
+.service-grid .reveal:nth-child(6) { transition-delay: 0.3s; }
+
+.gallery-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
+.gallery-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
+.gallery-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
+
+.testimonial-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+.testimonial-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+
+/* ---------- Nav toggle -> X ---------- */
+
+.nav.open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav.open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav.open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Scroll hint pulse ---------- */
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.scroll-hint span {
+  animation: hint-pulse 2.6s ease-in-out infinite;
+}
+
+/* ---------- FAQ / accordion-style expand (used if extended) ---------- */
+
+.expandable {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.45s var(--ease);
+}
+.expandable.open {
+  max-height: 600px;
+}
+
+/* ---------- WhatsApp float subtle breathing ---------- */
+
+@keyframes wa-breathe {
+  0%, 100% { box-shadow: 0 12px 28px -8px rgba(31,184,85,0.6); }
+  50% { box-shadow: 0 12px 34px -6px rgba(31,184,85,0.85); }
+}
+.wa-float {
+  animation: wa-breathe 3.4s ease-in-out infinite;
+}

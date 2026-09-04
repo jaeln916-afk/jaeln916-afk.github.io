@@ -1,0 +1,19 @@
+Coloca aquí las fotos del taller (trabajos, equipo, instalaciones).
+
+Formatos recomendados: .jpg o .webp, idealmente entre 1200-1600px de ancho.
+
+Luego, en index.html, dentro de la sección <section class="gallery" id="galeria">,
+reemplaza cada bloque:
+
+  <figure class="gallery-item reveal placeholder">
+    <span>Foto próximamente</span>
+  </figure>
+
+por:
+
+  <figure class="gallery-item reveal">
+    <img src="assets/imagenes/nombre-de-tu-foto.jpg" alt="Descripción de la foto" loading="lazy">
+  </figure>
+
+El diseño (recorte, bordes, hover con zoom) ya está listo en css/components.css,
+no hace falta tocar nada más.
