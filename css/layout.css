@@ -736,3 +736,441 @@
     gap: 0.5rem;
   }
 }
+/* ==========================================================================
+TALLERES JUMA — AJUSTES EXCLUSIVOS PARA CELULAR
+NO MODIFICA LA VERSIÓN DE PC
+========================================================================== */
+
+@media (max-width: 768px) {
+
+/* ------------------------------------------------------------------------
+BASE — EVITAR DESBORDAMIENTO HORIZONTAL
+------------------------------------------------------------------------ */
+
+html,
+body {
+width: 100%;
+max-width: 100%;
+overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------------------
+CONTENEDORES
+------------------------------------------------------------------------ */
+
+.container,
+.section-container,
+.hero-container {
+width: 100%;
+max-width: 100%;
+margin-left: auto;
+margin-right: auto;
+padding-left: 20px;
+padding-right: 20px;
+}
+
+/* ------------------------------------------------------------------------
+HERO — TODO CENTRADO
+------------------------------------------------------------------------ */
+
+.hero,
+.hero-content,
+.hero-copy {
+text-align: center;
+}
+
+.hero-content,
+.hero-copy {
+width: 100%;
+max-width: 100%;
+margin-left: auto;
+margin-right: auto;
+}
+
+.hero-title,
+.hero-lead,
+.hero-eyebrow {
+margin-left: auto;
+margin-right: auto;
+}
+
+/* ------------------------------------------------------------------------
+BOTONES DEL HERO
+------------------------------------------------------------------------ */
+
+.hero-actions {
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+
+.hero-actions a,
+.hero-actions button,
+.hero-actions .btn {
+width: min(100%, 340px);
+max-width: 340px;
+margin-left: auto;
+margin-right: auto;
+}
+
+/* ------------------------------------------------------------------------
+TAGS
+------------------------------------------------------------------------ */
+
+.hero-tags {
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+/* ------------------------------------------------------------------------
+ESTADÍSTICAS
+------------------------------------------------------------------------ */
+
+.hero-stats {
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+/* ------------------------------------------------------------------------
+REDES SOCIALES
+IMPORTANTE: SOLO ARRIBA / ABAJO, NUNCA DESPLAZAMIENTO LATERAL
+------------------------------------------------------------------------ */
+
+.social-links,
+.social-icons,
+.social-buttons,
+.footer-social,
+.contact-social {
+width: 100%;
+max-width: 100%;
+display: flex;
+
+```
+flex-direction: column;
+
+align-items: center;
+justify-content: center;
+
+gap: 10px;
+
+margin-left: auto;
+margin-right: auto;
+
+overflow: hidden;
+```
+
+}
+
+.social-links a,
+.social-icons a,
+.social-buttons a,
+.footer-social a,
+.contact-social a {
+position: relative;
+
+```
+flex: 0 0 auto;
+
+max-width: 100%;
+
+transform: none !important;
+```
+
+}
+
+/*
+Evita que los botones sociales se muevan hacia los lados
+incluso si otro CSS les aplica transform.
+*/
+
+.social-links a:hover,
+.social-icons a:hover,
+.social-buttons a:hover,
+.footer-social a:hover,
+.contact-social a:hover {
+transform: translateY(-2px) !important;
+}
+
+/* ------------------------------------------------------------------------
+REDES EN FILA — SOLO SI TU HTML USA ICONOS PEQUEÑOS
+------------------------------------------------------------------------ */
+
+.social-row {
+width: 100%;
+max-width: 100%;
+
+```
+display: flex;
+flex-wrap: wrap;
+
+align-items: center;
+justify-content: center;
+
+gap: 10px;
+
+margin-left: auto;
+margin-right: auto;
+```
+
+}
+
+.social-row > * {
+flex: 0 0 auto;
+}
+
+/* ------------------------------------------------------------------------
+SECCIONES
+------------------------------------------------------------------------ */
+
+section {
+width: 100%;
+max-width: 100%;
+}
+
+.section-header {
+width: 100%;
+max-width: 100%;
+margin-left: auto;
+margin-right: auto;
+
+```
+text-align: center;
+```
+
+}
+
+/* ------------------------------------------------------------------------
+GRIDS — UNA COLUMNA EN CELULAR
+------------------------------------------------------------------------ */
+
+.service-grid,
+.gallery-grid,
+.testimonial-grid {
+width: 100%;
+max-width: 100%;
+
+```
+display: grid;
+
+grid-template-columns: minmax(0, 1fr);
+
+gap: 18px;
+
+margin-left: auto;
+margin-right: auto;
+```
+
+}
+
+/* ------------------------------------------------------------------------
+TARJETAS
+------------------------------------------------------------------------ */
+
+.service-card,
+.gallery-card,
+.testimonial-card {
+width: 100%;
+max-width: 100%;
+min-width: 0;
+
+```
+margin-left: auto;
+margin-right: auto;
+```
+
+}
+
+/* ------------------------------------------------------------------------
+IMÁGENES
+------------------------------------------------------------------------ */
+
+img,
+video,
+iframe {
+max-width: 100%;
+}
+
+.gallery-card img {
+width: 100%;
+height: auto;
+max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+TEXTOS — EVITAR QUE ROMPAN EL ANCHO
+------------------------------------------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+p {
+max-width: 100%;
+overflow-wrap: break-word;
+}
+
+/* ------------------------------------------------------------------------
+BOTONES GENERALES
+------------------------------------------------------------------------ */
+
+.btn,
+.button {
+max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+WHATSAPP FLOTANTE
+NO PERMITIR QUE SE SALGA DE LA PANTALLA
+------------------------------------------------------------------------ */
+
+.wa-float {
+position: fixed;
+
+```
+right: 18px;
+bottom: 18px;
+
+max-width: calc(100vw - 36px);
+
+z-index: 1000;
+```
+
+}
+
+/* ------------------------------------------------------------------------
+NAVBAR
+------------------------------------------------------------------------ */
+
+.nav {
+width: 100%;
+max-width: 100%;
+}
+
+.nav-container {
+width: 100%;
+max-width: 100%;
+
+```
+padding-left: 16px;
+padding-right: 16px;
+
+margin-left: auto;
+margin-right: auto;
+```
+
+}
+
+.nav-logo {
+max-width: 75%;
+overflow: hidden;
+}
+
+.nav-logo img {
+max-width: 100%;
+height: auto;
+}
+
+/* ------------------------------------------------------------------------
+MENÚ MÓVIL
+------------------------------------------------------------------------ */
+
+.nav-menu {
+max-width: 100vw;
+overflow-x: hidden;
+}
+
+.nav-menu a {
+max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+FORMULARIOS
+------------------------------------------------------------------------ */
+
+input,
+textarea,
+select {
+width: 100%;
+max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+MARQUEE
+------------------------------------------------------------------------ */
+
+.marquee {
+width: 100%;
+max-width: 100%;
+overflow: hidden;
+}
+
+.marquee-track {
+width: max-content;
+}
+
+/* ------------------------------------------------------------------------
+FAQ
+------------------------------------------------------------------------ */
+
+.faq,
+.faq-item,
+.expandable {
+width: 100%;
+max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+CENTRADO DE ELEMENTOS SUELTOS
+------------------------------------------------------------------------ */
+
+.center-mobile {
+margin-left: auto !important;
+margin-right: auto !important;
+text-align: center !important;
+}
+
+}
+
+/* ==========================================================================
+CELULARES PEQUEÑOS
+========================================================================== */
+
+@media (max-width: 480px) {
+
+.container,
+.section-container,
+.hero-container {
+padding-left: 16px;
+padding-right: 16px;
+}
+
+.hero-actions a,
+.hero-actions button,
+.hero-actions .btn {
+width: 100%;
+max-width: 320px;
+}
+
+.wa-float {
+right: 14px;
+bottom: 14px;
+}
+
+}
