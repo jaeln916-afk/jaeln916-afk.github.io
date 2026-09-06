@@ -6,6 +6,8 @@
 /* ---------- Botones ---------- */
 
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +19,28 @@
   transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
+.btn::before {
+  /* Brillo que recorre el botón al pasar el cursor — un único gesto
+     de pulido en vez de un simple cambio de color plano. */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.65s var(--ease-out);
+  pointer-events: none;
+}
+.btn:hover::before {
+  left: 120%;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
 .btn-primary {
   background: var(--red);
   color: var(--white);
@@ -25,6 +49,7 @@
 .btn-primary:hover {
   background: var(--red-bright);
   transform: translateY(-2px);
+  box-shadow: var(--glow-red-lg);
 }
 
 .btn-ghost {
@@ -35,7 +60,7 @@
 }
 .btn-ghost:hover {
   background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.28);
+  border-color: var(--border-hi);
   transform: translateY(-2px);
 }
 
@@ -46,7 +71,9 @@
 }
 .btn-outline:hover {
   background: var(--red);
+  border-color: var(--red);
   transform: translateY(-2px);
+  box-shadow: var(--glow-red);
 }
 
 /* ---------- Social rail pills ---------- */
@@ -62,7 +89,7 @@
   border: 1px solid var(--border-soft);
   backdrop-filter: blur(8px);
   color: var(--ice);
-  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .social-pill svg { width: 18px; height: 18px; }
 .social-pill:hover {
@@ -70,6 +97,7 @@
   border-color: var(--red);
   color: var(--white);
   transform: translateX(-4px);
+  box-shadow: var(--glow-red);
 }
 
 /* ---------- Service cards ---------- */
@@ -81,12 +109,27 @@
 }
 
 .service-card {
+  position: relative;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
   padding: 2rem 1.7rem;
   backdrop-filter: blur(10px);
-  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.service-card::before {
+  /* Barra de acento superior: nace apagada y se enciende al pasar el
+     cursor, marcando la tarjeta activa sin recurrir a un borde grueso. */
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red-bright), var(--blue-bright));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
 }
 
 .service-card h3 {
@@ -115,17 +158,22 @@
   transform: translateY(-6px);
   border-color: var(--border-red);
   background: rgba(255,255,255,0.07);
+  box-shadow: var(--shadow-deep);
+}
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 /* ---------- Gallery ---------- */
 
 .gallery-item {
+  position: relative;
   margin: 0;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-soft);
-  position: relative;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .gallery-item img {
   width: 100%;
@@ -133,8 +181,27 @@
   object-fit: cover;
   transition: transform 0.6s var(--ease);
 }
+.gallery-item::after {
+  /* Velo de lectura al hacer hover: da sensación de placa iluminada,
+     coherente con el resto del fondo, sin necesitar overlay en el HTML. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(6,12,43,0.55), transparent 55%),
+              linear-gradient(200deg, rgba(209,18,31,0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.gallery-item:hover {
+  border-color: var(--border-red);
+  box-shadow: var(--shadow-deep);
+}
 .gallery-item:hover img {
   transform: scale(1.06);
+}
+.gallery-item:hover::after {
+  opacity: 1;
 }
 
 .gallery-item.placeholder {
@@ -162,15 +229,34 @@
 }
 
 .testimonial-card {
+  position: relative;
   margin: 0;
   background: var(--surface);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
   padding: 1.9rem;
   backdrop-filter: blur(10px);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.testimonial-card::before {
+  content: '”';
+  position: absolute;
+  top: 0.6rem;
+  right: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--white);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.testimonial-card:hover {
+  border-color: var(--border-hi);
+  transform: translateY(-3px);
 }
 
 .testimonial-card p {
+  position: relative;
   font-size: 0.98rem;
   line-height: 1.65;
   color: var(--ice);
@@ -196,6 +282,7 @@
   font-size: 0.78rem;
   font-weight: 600;
   flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
 }
 
 .testimonial-card cite {
@@ -223,11 +310,11 @@
   padding: 0.9rem 1.5rem;
   border-radius: var(--radius-sm);
   font-size: 0.92rem;
-  box-shadow: var(--shadow-lift);
+  box-shadow: var(--shadow-deep);
   z-index: 300;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease-spring);
 }
 .toast.show {
   opacity: 1;
@@ -247,5 +334,28 @@
 }
 
 @media (max-width: 500px) {
-  .service-grid { grid-template-columns: 1fr; }
+  .service-grid { grid-template-columns: 1fr; }     
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+
+
+/* LOGO MÁS GRANDE Y LARGO */
+.brand-logo {
+  width: 180px !important;
+  height: auto !important;
+  max-height: 62px !important;
+  object-fit: contain;
+  display: block;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .brand-logo {
+    width: 150px !important;
+    max-height: 54px !important;
+  }
 }

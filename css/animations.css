@@ -1,82 +1,118 @@
-/* ==========================================================================
-   Talleres Juma — animations.css
-   Keyframes y transiciones de estado (reveal, marquee, nav móvil)
-   ========================================================================== */
-
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marquee-scroll 32s linear infinite;
-}
-
-/* ---------- Scroll reveal ---------- */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.service-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
-.service-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
-.service-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
-.service-grid .reveal:nth-child(5) { transition-delay: 0.24s; }
-.service-grid .reveal:nth-child(6) { transition-delay: 0.3s; }
-
-.gallery-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
-.gallery-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
-.gallery-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
-
-.testimonial-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
-.testimonial-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
-
-/* ---------- Nav toggle -> X ---------- */
-
-.nav.open .nav-toggle span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.nav.open .nav-toggle span:nth-child(2) {
-  opacity: 0;
-}
-.nav.open .nav-toggle span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ---------- Scroll hint pulse ---------- */
-
-@keyframes hint-pulse {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
-}
-.scroll-hint span {
-  animation: hint-pulse 2.6s ease-in-out infinite;
-}
-
-/* ---------- FAQ / accordion-style expand (used if extended) ---------- */
-
-.expandable {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.45s var(--ease);
-}
-.expandable.open {
-  max-height: 600px;
-}
-
-/* ---------- WhatsApp float subtle breathing ---------- */
-
-@keyframes wa-breathe {
-  0%, 100% { box-shadow: 0 12px 28px -8px rgba(31,184,85,0.6); }
-  50% { box-shadow: 0 12px 34px -6px rgba(31,184,85,0.85); }
-}
-.wa-float {
-  animation: wa-breathe 3.4s ease-in-out infinite;
-}
+/* ========================================================================== 
+   Talleres Juma — animations.css 
+   Keyframes y transiciones de estado (reveal, marquee, nav móvil) 
+   ========================================================================== */ 
+ 
+@keyframes marquee-scroll { 
+  from { transform: translateX(0); } 
+  to { transform: translateX(-50%); } 
+} 
+ 
+.marquee-track { 
+  animation: marquee-scroll 32s linear infinite; 
+} 
+ 
+/* ---------- Entrada del hero ---------- */ 
+/* Un único momento orquestado al cargar la página: cada bloque del hero 
+   entra en cascada con una pizca de desenfoque, como si la escena 3D 
+   enfocara. Si el HTML no trae la clase .hero-load, todo se ve estático 
+   y correcto igualmente — no rompe nada. */ 
+ 
+@keyframes hero-in { 
+  from { 
+    opacity: 0; 
+    transform: translateY(18px); 
+    filter: blur(6px); 
+  } 
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+    filter: blur(0); 
+  } 
+} 
+ 
+.hero-load .hero-eyebrow, 
+.hero-load .hero-title, 
+.hero-load .hero-lead, 
+.hero-load .hero-actions, 
+.hero-load .hero-tags, 
+.hero-load .hero-stats { 
+  animation: hero-in 0.9s var(--ease-out) both; 
+} 
+.hero-load .hero-eyebrow  { animation-delay: 0.02s; } 
+.hero-load .hero-title    { animation-delay: 0.10s; } 
+.hero-load .hero-lead     { animation-delay: 0.20s; } 
+.hero-load .hero-actions  { animation-delay: 0.30s; } 
+.hero-load .hero-tags     { animation-delay: 0.38s; } 
+.hero-load .hero-stats    { animation-delay: 0.46s; } 
+ 
+/* ---------- Scroll reveal ---------- */ 
+ 
+.reveal { 
+  opacity: 0; 
+  transform: translateY(28px) scale(0.985); 
+  filter: blur(3px); 
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease); 
+} 
+ 
+.reveal.is-visible { 
+  opacity: 1; 
+  transform: translateY(0) scale(1); 
+  filter: blur(0); 
+} 
+ 
+.service-grid .reveal:nth-child(2) { transition-delay: 0.06s; } 
+.service-grid .reveal:nth-child(3) { transition-delay: 0.12s; } 
+.service-grid .reveal:nth-child(4) { transition-delay: 0.18s; } 
+.service-grid .reveal:nth-child(5) { transition-delay: 0.24s; } 
+.service-grid .reveal:nth-child(6) { transition-delay: 0.3s; } 
+ 
+.gallery-grid .reveal:nth-child(2) { transition-delay: 0.06s; } 
+.gallery-grid .reveal:nth-child(3) { transition-delay: 0.12s; } 
+.gallery-grid .reveal:nth-child(4) { transition-delay: 0.18s; } 
+ 
+.testimonial-grid .reveal:nth-child(2) { transition-delay: 0.08s; } 
+.testimonial-grid .reveal:nth-child(3) { transition-delay: 0.16s; } 
+ 
+/* ---------- Nav toggle -> X ---------- */ 
+ 
+.nav.open .nav-toggle span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+} 
+.nav.open .nav-toggle span:nth-child(2) { 
+  opacity: 0; 
+} 
+.nav.open .nav-toggle span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+} 
+ 
+/* ---------- Scroll hint pulse ---------- */ 
+ 
+@keyframes hint-pulse { 
+  0%, 100% { opacity: 0.35; transform: translateY(0); } 
+  50% { opacity: 1; transform: translateY(3px); } 
+} 
+.scroll-hint span { 
+  animation: hint-pulse 2.6s ease-in-out infinite; 
+} 
+ 
+/* ---------- FAQ / accordion-style expand (used if extended) ---------- */ 
+ 
+.expandable { 
+  overflow: hidden; 
+  max-height: 0; 
+  transition: max-height 0.45s var(--ease); 
+} 
+.expandable.open { 
+  max-height: 600px; 
+} 
+ 
+/* ---------- WhatsApp float subtle breathing ---------- */ 
+ 
+@keyframes wa-breathe { 
+  0%, 100% { box-shadow: 0 12px 28px -8px rgba(31,184,85,0.6), inset 0 1px 0 rgba(255,255,255,0.25); } 
+  50% { box-shadow: 0 12px 34px -6px rgba(31,184,85,0.85), inset 0 1px 0 rgba(255,255,255,0.25); } 
+} 
+.wa-float { 
+  animation: wa-breathe 3.4s ease-in-out infinite; 
+} 
