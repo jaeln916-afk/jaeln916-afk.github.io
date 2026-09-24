@@ -1,225 +1,214 @@
 ```css
 /* ==========================================================================
    Talleres Juma — components.css
-   Contraste elegante + botones modernos + tarjetas + galería + testimonios
+   Piezas reutilizables: botones, tarjetas, galería, testimonios, toast
    ========================================================================== */
 
 
-/* ==========================================================
-   BOTONES — DISEÑO MODERNO
-   ========================================================== */
+/* ---------- Botones ---------- */
 
 .btn {
+
   position: relative;
+
   overflow: hidden;
+
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
-  gap: 0.5rem;
 
-  padding: 0.82rem 1.65rem;
-  border-radius: 10px;
+  padding: 0.85rem 1.7rem;
 
-  font-weight: 650;
-  font-size: 0.94rem;
-  letter-spacing: 0.01em;
+  border-radius: var(--radius-sm);
+
+  font-weight: 600;
+
+  font-size: 0.96rem;
 
   border: 1px solid transparent;
-  cursor: pointer;
 
-  transition:
-    transform 0.28s ease,
-    background 0.28s ease,
-    border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    filter 0.28s ease;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
 }
 
-
-/* Brillo sutil */
-
 .btn::before {
+
+  /* Brillo que recorre el botón al pasar el cursor — un único gesto
+     de pulido en vez de un simple cambio de color plano. */
+
   content: '';
+
   position: absolute;
+
   top: 0;
-  left: -90%;
-  width: 55%;
+
+  left: -60%;
+
+  width: 40%;
+
   height: 100%;
 
-  background: linear-gradient(
-    110deg,
-    transparent,
-    rgba(255,255,255,0.22),
-    transparent
-  );
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.35), transparent);
 
-  transform: skewX(-20deg);
-  transition: left 0.7s ease;
+  transform: skewX(-18deg);
+
+  transition: left 0.65s var(--ease-out);
+
   pointer-events: none;
+
 }
 
 .btn:hover::before {
-  left: 130%;
+
+  left: 120%;
+
 }
 
 .btn:active {
-  transform: translateY(1px) scale(0.98);
+
+  transform: translateY(0) scale(0.97);
+
 }
 
-
-/* ---------- Botón principal ---------- */
-
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    #d7192b,
-    #b70f20
-  );
 
-  color: #ffffff;
+  background: var(--red);
 
-  border-color: rgba(255,255,255,0.08);
+  color: var(--white);
 
-  box-shadow:
-    0 7px 20px rgba(180, 15, 32, 0.28),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+  box-shadow: var(--glow-red);
+
 }
 
 .btn-primary:hover {
-  background: linear-gradient(
-    135deg,
-    #e21b30,
-    #c51124
-  );
+
+  background: var(--red-bright);
 
   transform: translateY(-2px);
 
-  box-shadow:
-    0 10px 25px rgba(180, 15, 32, 0.36),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow: var(--glow-red-lg);
+
 }
 
-
-/* ---------- Botón transparente ---------- */
-
 .btn-ghost {
-  background: rgba(15, 22, 42, 0.58);
 
-  color: #eef3f9;
+  background: rgba(255,255,255,0.06);
 
-  border-color: rgba(255,255,255,0.14);
+  color: var(--white);
 
-  backdrop-filter: blur(10px);
+  border-color: var(--border-soft);
 
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+
 }
 
 .btn-ghost:hover {
-  background: rgba(25, 32, 55, 0.78);
 
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
 
-  color: #ffffff;
+  border-color: var(--border-hi);
 
   transform: translateY(-2px);
 
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-
-/* ---------- Botón outline ---------- */
-
 .btn-outline {
-  background: rgba(10, 16, 35, 0.32);
 
-  color: #ffffff;
+  background: transparent;
 
-  border-color: rgba(215, 25, 43, 0.75);
+  color: var(--white);
 
-  backdrop-filter: blur(8px);
+  border-color: var(--red);
+
 }
 
 .btn-outline:hover {
-  background: rgba(215, 25, 43, 0.88);
 
-  border-color: #e21b30;
+  background: var(--red);
+
+  border-color: var(--red);
 
   transform: translateY(-2px);
 
-  box-shadow:
-    0 8px 22px rgba(180,15,32,0.28);
+  box-shadow: var(--glow-red);
+
 }
 
 
-/* ==========================================================
-   SOCIAL RAIL
-   ========================================================== */
+/* ---------- Social rail pills ---------- */
 
 .social-pill {
+
   width: 42px;
+
   height: 42px;
 
   border-radius: 50%;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
-  background: rgba(18, 25, 46, 0.55);
+  background: rgba(255,255,255,0.06);
 
-  border: 1px solid rgba(255,255,255,0.13);
+  border: 1px solid var(--border-soft);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 
-  color: #dce5f0;
+  color: var(--ice);
 
-  transition:
-    background 0.28s ease,
-    border-color 0.28s ease,
-    color 0.28s ease,
-    transform 0.28s ease,
-    box-shadow 0.28s ease;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
 }
 
 .social-pill svg {
+
   width: 18px;
+
   height: 18px;
+
 }
 
 .social-pill:hover {
-  background: rgba(205, 18, 35, 0.9);
 
-  border-color: rgba(255,255,255,0.15);
+  background: var(--red);
 
-  color: #ffffff;
+  border-color: var(--red);
 
-  transform: translateX(-3px);
+  color: var(--white);
 
-  box-shadow:
-    0 7px 18px rgba(180,15,32,0.25);
+  transform: translateX(-4px);
+
+  box-shadow: var(--glow-red);
+
 }
 
 
-/* ==========================================================
-   SERVICE CARDS
-   ========================================================== */
+/* ---------- Service cards ---------- */
 
 .service-grid {
+
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 1.4rem;
+
 }
 
 .service-card {
+
   position: relative;
+
   overflow: hidden;
 
-  background: rgba(10, 16, 35, 0.76);
+  background: var(--surface);
 
-  border: 1px solid rgba(255,255,255,0.11);
+  border: 1px solid var(--border-soft);
 
   border-radius: var(--radius-md);
 
@@ -227,42 +216,35 @@
 
   backdrop-filter: blur(10px);
 
-  transition:
-    transform 0.35s ease,
-    border-color 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.35s ease;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
 }
 
-
-/* Línea superior */
-
 .service-card::before {
+
+  /* Barra de acento superior: nace apagada y se enciende al pasar el
+     cursor, marcando la tarjeta activa sin recurrir a un borde grueso. */
+
   content: '';
 
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+
+  top: 0; left: 0; right: 0;
 
   height: 2px;
 
-  background: linear-gradient(
-    90deg,
-    rgba(220,25,45,0.85),
-    rgba(55,110,220,0.7)
-  );
+  background: linear-gradient(90deg, var(--red-bright), var(--blue-bright));
 
   transform: scaleX(0);
+
   transform-origin: left;
 
-  transition: transform 0.5s ease;
+  transition: transform 0.5s var(--ease-out);
+
 }
 
-
-/* Títulos de servicios */
-
 .service-card h3 {
+
   font-size: 1.2rem;
 
   margin-bottom: 0.7rem;
@@ -270,61 +252,60 @@
   position: relative;
 
   padding-left: 1.1rem;
+
 }
 
 .service-card h3::before {
+
   content: '';
 
   position: absolute;
 
   left: 0;
+
   top: 0.35em;
 
   width: 6px;
+
   height: 6px;
 
   background: var(--red-bright);
+
 }
 
-
-/* TEXTO EXPLICATIVO */
-
 .service-card p {
-  color: rgba(232, 238, 247, 0.84) !important;
 
-  opacity: 1 !important;
+  color: var(--steel);
 
   font-size: 0.95rem;
 
-  font-weight: 450 !important;
+  line-height: 1.6;
 
-  line-height: 1.65;
-
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.55);
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
 
-  border-color: rgba(210,25,43,0.45);
+  transform: translateY(-6px);
 
-  background: rgba(14, 21, 42, 0.84);
+  border-color: var(--border-red);
 
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.28);
+  background: rgba(255,255,255,0.07);
+
+  box-shadow: var(--shadow-deep);
+
 }
 
 .service-card:hover::before {
+
   transform: scaleX(1);
+
 }
 
 
-/* ==========================================================
-   GALERÍA
-   ========================================================== */
+/* ---------- Gallery ---------- */
 
 .gallery-item {
+
   position: relative;
 
   margin: 0;
@@ -335,78 +316,82 @@
 
   overflow: hidden;
 
-  border: 1px solid rgba(255,255,255,0.11);
+  border: 1px solid var(--border-soft);
 
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
 }
 
 .gallery-item img {
+
   width: 100%;
+
   height: 100%;
 
   object-fit: cover;
 
-  transition: transform 0.6s ease;
+  transition: transform 0.6s var(--ease);
+
 }
 
 .gallery-item::after {
+
+  /* Velo de lectura al hacer hover: da sensación de placa iluminada,
+     coherente con el resto del fondo, sin necesitar overlay en el HTML. */
+
   content: '';
 
   position: absolute;
+
   inset: 0;
 
-  background:
-    linear-gradient(
-      0deg,
-      rgba(6,12,43,0.48),
-      transparent 55%
-    ),
-    linear-gradient(
-      200deg,
-      rgba(209,18,31,0.13),
-      transparent 60%
-    );
+  background: linear-gradient(0deg, rgba(6,12,43,0.55), transparent 55%),
+              linear-gradient(200deg, rgba(209,18,31,0.18), transparent 60%);
 
   opacity: 0;
 
-  transition: opacity 0.3s ease;
+  transition: opacity var(--dur) var(--ease);
 
   pointer-events: none;
+
 }
 
 .gallery-item:hover {
-  border-color: rgba(210,25,43,0.45);
 
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.28);
+  border-color: var(--border-red);
+
+  box-shadow: var(--shadow-deep);
+
 }
 
 .gallery-item:hover img {
-  transform: scale(1.05);
+
+  transform: scale(1.06);
+
 }
 
 .gallery-item:hover::after {
+
   opacity: 1;
+
 }
 
 .gallery-item.placeholder {
+
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   background:
-    repeating-linear-gradient(
-      135deg,
-      rgba(255,255,255,0.025) 0 10px,
-      transparent 10px 20px
-    ),
-    rgba(255,255,255,0.025);
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 10px, transparent 10px 20px),
+    rgba(255,255,255,0.03);
+
 }
 
 .gallery-item.placeholder span {
+
   font-family: var(--font-mono);
 
   font-size: 0.72rem;
@@ -416,29 +401,31 @@
   color: var(--steel-dim);
 
   text-transform: uppercase;
+
 }
 
 
-/* ==========================================================
-   TESTIMONIOS
-   ========================================================== */
+/* ---------- Testimonials ---------- */
 
 .testimonial-grid {
+
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
 
   gap: 1.4rem;
+
 }
 
 .testimonial-card {
+
   position: relative;
 
   margin: 0;
 
-  background: rgba(10, 16, 35, 0.76);
+  background: var(--surface);
 
-  border: 1px solid rgba(255,255,255,0.11);
+  border: 1px solid var(--border-soft);
 
   border-radius: var(--radius-md);
 
@@ -446,18 +433,18 @@
 
   backdrop-filter: blur(10px);
 
-  transition:
-    border-color 0.3s ease,
-    transform 0.3s ease,
-    background 0.3s ease;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+
 }
 
 .testimonial-card::before {
+
   content: '”';
 
   position: absolute;
 
   top: 0.6rem;
+
   right: 1.2rem;
 
   font-family: var(--font-display);
@@ -466,68 +453,62 @@
 
   line-height: 1;
 
-  color: #ffffff;
+  color: var(--white);
 
-  opacity: 0.045;
+  opacity: 0.06;
 
   pointer-events: none;
+
 }
 
+.testimonial-card:hover {
 
-/* Texto del testimonio */
+  border-color: var(--border-hi);
+
+  transform: translateY(-3px);
+
+}
 
 .testimonial-card p {
+
   position: relative;
 
   font-size: 0.98rem;
 
   line-height: 1.65;
 
-  color: rgba(232,238,247,0.84) !important;
-
-  opacity: 1 !important;
-
-  font-weight: 450 !important;
+  color: var(--ice);
 
   margin-bottom: 1.6rem;
 
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.55);
-}
-
-.testimonial-card:hover {
-  border-color: rgba(255,255,255,0.18);
-
-  transform: translateY(-3px);
-
-  background: rgba(14,21,42,0.82);
 }
 
 .testimonial-card footer {
+
   display: flex;
 
   align-items: center;
 
   gap: 0.9rem;
+
 }
 
 .avatar {
+
   width: 40px;
+
   height: 40px;
 
   border-radius: 50%;
 
-  background: linear-gradient(
-    135deg,
-    var(--blue),
-    var(--red)
-  );
+  background: linear-gradient(135deg, var(--blue), var(--red));
 
-  color: #ffffff;
+  color: var(--white);
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   font-family: var(--font-mono);
@@ -538,11 +519,12 @@
 
   flex-shrink: 0;
 
-  box-shadow:
-    0 0 0 3px rgba(255,255,255,0.045);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+
 }
 
 .testimonial-card cite {
+
   display: block;
 
   font-style: normal;
@@ -551,38 +533,36 @@
 
   font-size: 0.92rem;
 
-  color: #ffffff !important;
+  color: var(--white);
 
-  opacity: 1 !important;
 }
 
 .testimonial-meta {
+
   font-size: 0.78rem;
 
-  color: rgba(205,216,231,0.72) !important;
+  color: var(--steel-dim);
 
-  opacity: 1 !important;
 }
 
 
-/* ==========================================================
-   TOAST
-   ========================================================== */
+/* ---------- Toast ---------- */
 
 .toast {
+
   position: fixed;
 
   left: 50%;
 
   bottom: 2rem;
 
-  transform: translate(-50%,20px);
+  transform: translate(-50%, 20px);
 
-  background: rgba(10,16,35,0.94);
+  background: var(--navy);
 
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid var(--border-soft);
 
-  color: #ffffff;
+  color: var(--white);
 
   padding: 0.9rem 1.5rem;
 
@@ -590,8 +570,7 @@
 
   font-size: 0.92rem;
 
-  box-shadow:
-    0 15px 35px rgba(0,0,0,0.35);
+  box-shadow: var(--shadow-deep);
 
   z-index: 300;
 
@@ -599,198 +578,30 @@
 
   pointer-events: none;
 
-  transition:
-    opacity var(--dur) var(--ease),
-    transform var(--dur) var(--ease-spring);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease-spring);
+
 }
 
 .toast.show {
+
   opacity: 1;
 
-  transform: translate(-50%,0);
+  transform: translate(-50%, 0);
+
 }
 
 .toast::before {
+
   content: '✓ ';
 
   color: #34d17a;
 
   font-weight: 700;
+
 }
 
 
-/* ==========================================================
-   LOGO
-   ========================================================== */
-
-.brand-logo {
-  width: 180px !important;
-
-  height: auto !important;
-
-  max-height: 62px !important;
-
-  object-fit: contain;
-
-  display: block;
-}
-
-.brand {
-  display: flex;
-
-  align-items: center;
-}
-
-
-/* ==========================================================
-   TEXTO DESCRIPTIVO GENERAL
-   Contraste moderado, sin efecto brillante excesivo.
-   ========================================================== */
-
-/* Párrafos */
-
-p {
-  opacity: 0.92 !important;
-
-  color: rgba(232,238,247,0.86) !important;
-
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.55);
-}
-
-
-/* Textos explicativos */
-
-.service-card p,
-.testimonial-card p {
-  opacity: 0.92 !important;
-
-  color: rgba(232,238,247,0.86) !important;
-}
-
-
-/* Listas */
-
-li {
-  opacity: 0.9 !important;
-
-  color: rgba(232,238,247,0.86) !important;
-
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.5);
-}
-
-
-/* Labels */
-
-label {
-  opacity: 0.9 !important;
-
-  color: rgba(232,238,247,0.86) !important;
-
-  text-shadow:
-    0 1px 3px rgba(0,0,0,0.5);
-}
-
-
-/* ==========================================================
-   HERO
-   Mantener títulos fuertes, pero párrafos más naturales.
-   ========================================================== */
-
-.hero h1 {
-  color: #ffffff !important;
-
-  opacity: 1 !important;
-
-  text-shadow:
-    0 2px 5px rgba(0,0,0,0.72);
-}
-
-.hero .eyebrow,
-.hero .section-eyebrow {
-  color: #ffffff !important;
-
-  opacity: 0.94 !important;
-
-  text-shadow:
-    0 2px 5px rgba(0,0,0,0.7);
-}
-
-.hero p {
-  color: rgba(245,248,252,0.9) !important;
-
-  opacity: 0.92 !important;
-
-  font-weight: 450;
-
-  text-shadow:
-    0 2px 4px rgba(0,0,0,0.65);
-}
-
-.hero-content {
-  position: relative;
-
-  z-index: 10;
-}
-
-.hero-content p {
-  max-width: 650px;
-
-  color: rgba(245,248,252,0.9) !important;
-
-  font-weight: 450;
-
-  text-shadow:
-    0 2px 4px rgba(0,0,0,0.65);
-}
-
-
-/* ==========================================================
-   CÓMO TRABAJAMOS
-   ========================================================== */
-
-.split.reverse .section-kicker {
-  color: #ffffff !important;
-
-  opacity: 0.94 !important;
-
-  font-weight: 700 !important;
-
-  text-shadow:
-    0 2px 5px rgba(0,0,0,0.7);
-}
-
-
-/* Texto que explica la sección */
-
-.split.reverse .split-text > p:not(.section-kicker) {
-  color: rgba(240,245,251,0.88) !important;
-
-  opacity: 0.9 !important;
-
-  font-weight: 450 !important;
-
-  text-shadow:
-    0 2px 4px rgba(0,0,0,0.62);
-}
-
-
-/* Título */
-
-.split.reverse .split-text h2 {
-  color: #ffffff !important;
-
-  opacity: 1 !important;
-
-  text-shadow:
-    0 2px 6px rgba(0,0,0,0.75);
-}
-
-
-/* ==========================================================
-   RESPONSIVE
-   ========================================================== */
+/* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
 
@@ -801,17 +612,10 @@ label {
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
+
 }
 
-
-@media (max-width: 600px) {
-
-  .brand-logo {
-    width: 150px !important;
-
-    max-height: 54px !important;
-  }
-
+@media (max-width: 500px) {
 
   .service-grid {
     grid-template-columns: 1fr;
@@ -821,84 +625,265 @@ label {
     grid-template-columns: 1fr;
   }
 
+}
 
-  /* Texto descriptivo en celular */
 
-  p {
-    color: rgba(240,245,251,0.9) !important;
+/* ==========================================================
+   LOGO MÁS GRANDE Y LARGO
+   ========================================================== */
 
-    opacity: 0.9 !important;
+.brand-logo {
 
-    text-shadow:
-      0 2px 4px rgba(0,0,0,0.7);
+  width: 180px !important;
+
+  height: auto !important;
+
+  max-height: 62px !important;
+
+  object-fit: contain;
+
+  display: block;
+
+}
+
+.brand {
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+@media (max-width: 600px) {
+
+  .brand-logo {
+
+    width: 150px !important;
+
+    max-height: 54px !important;
+
   }
 
-  .service-card p,
+}
+
+
+/* ==========================================================
+   CONTRASTE ÚNICAMENTE PARA TEXTOS EXPLICATIVOS
+   ========================================================== */
+
+/*
+   IMPORTANTE:
+   No se modifican h1, h2, h3, h4, h5, h6.
+   No se modifican botones.
+   No se modifican enlaces generales.
+*/
+
+
+/* Descripción de los servicios */
+
+.service-card p {
+
+  color: rgba(225, 232, 242, 0.82) !important;
+
+  opacity: 0.95 !important;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.45);
+
+}
+
+
+/* Texto de los testimonios */
+
+.testimonial-card p {
+
+  color: rgba(225, 232, 242, 0.82) !important;
+
+  opacity: 0.95 !important;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.45);
+
+}
+
+
+/* Texto secundario de testimonios */
+
+.testimonial-meta {
+
+  color: rgba(205, 215, 230, 0.72) !important;
+
+  opacity: 0.95 !important;
+
+}
+
+
+/* ==========================================================
+   HERO — SOLO EL PÁRRAFO EXPLICATIVO
+   ========================================================== */
+
+.hero p {
+
+  color: rgba(235, 240, 247, 0.88) !important;
+
+  opacity: 0.95 !important;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.58);
+
+}
+
+
+/* ==========================================================
+   CÓMO TRABAJAMOS — SOLO TEXTO EXPLICATIVO
+   ========================================================== */
+
+.split.reverse .split-text > p:not(.section-kicker) {
+
+  color: rgba(235, 240, 247, 0.86) !important;
+
+  opacity: 0.95 !important;
+
+  font-weight: 500 !important;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.58);
+
+}
+
+
+/* ==========================================================
+   CELULAR
+   Contraste adicional SOLO donde está el texto explicativo.
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  /* Servicios */
+
+  .service-card p {
+
+    color: rgba(230, 236, 244, 0.9) !important;
+
+    opacity: 0.97 !important;
+
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.72);
+
+  }
+
+
+  /* Testimonios */
+
   .testimonial-card p {
-    color: rgba(240,245,251,0.9) !important;
 
-    opacity: 0.9 !important;
+    color: rgba(230, 236, 244, 0.9) !important;
 
-    text-shadow:
-      0 2px 4px rgba(0,0,0,0.7);
-  }
-
-
-  .testimonial-meta {
-    color: rgba(210,220,233,0.75) !important;
-
-    opacity: 0.9 !important;
-  }
-
-
-  li,
-  label {
-    color: rgba(240,245,251,0.9) !important;
-
-    opacity: 0.9 !important;
+    opacity: 0.97 !important;
 
     text-shadow:
-      0 2px 4px rgba(0,0,0,0.65);
+      0 1px 3px rgba(0, 0, 0, 0.72);
+
   }
 
 
-  /* Botones ligeramente más compactos */
-
-  .btn {
-    padding: 0.78rem 1.35rem;
-
-    font-size: 0.92rem;
-
-    border-radius: 9px;
-  }
-
-
-  /* Hero móvil */
-
-  .hero h1 {
-    text-shadow:
-      0 2px 5px rgba(0,0,0,0.78);
-  }
+  /* Texto del Hero */
 
   .hero p {
-    color: rgba(245,248,252,0.9) !important;
 
-    opacity: 0.9 !important;
+    color: rgba(235, 240, 247, 0.91) !important;
+
+    opacity: 0.97 !important;
 
     text-shadow:
-      0 2px 5px rgba(0,0,0,0.72);
+      0 2px 4px rgba(0, 0, 0, 0.75);
+
   }
 
 
-  /* Cómo trabajamos móvil */
+  /* Cómo trabajamos */
 
   .split.reverse .split-text > p:not(.section-kicker) {
-    color: rgba(240,245,251,0.9) !important;
 
-    opacity: 0.9 !important;
+    color: rgba(235, 240, 247, 0.9) !important;
+
+    opacity: 0.97 !important;
 
     text-shadow:
-      0 2px 5px rgba(0,0,0,0.72);
+      0 2px 4px rgba(0, 0, 0, 0.75);
+
   }
+
+
+  /* Meta de testimonios */
+
+  .testimonial-meta {
+
+    color: rgba(205, 215, 230, 0.78) !important;
+
+    opacity: 0.95 !important;
+
+  }
+
 }
 ```
+
+/* =========================================================
+   CONTRASTE REAL PARA TEXTOS EXPLICATIVOS — SOLO CUERPO
+   NO MODIFICA BOTONES NI TÍTULOS
+   ========================================================= */
+
+/* Textos explicativos generales */
+.service-card p,
+.testimonial-card p,
+.testimonial-meta,
+.split-text > p:not(.section-kicker),
+.about-text p,
+.contact-text p,
+.section-text p {
+  color: #dce6f5 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* =========================================================
+   CELULAR — CONTRASTE MÁS FUERTE
+   ========================================================= */
+@media (max-width: 600px) {
+
+  .service-card p,
+  .testimonial-card p,
+  .testimonial-meta,
+  .split-text > p:not(.section-kicker),
+  .about-text p,
+  .contact-text p,
+  .section-text p {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.95) !important;
+  }
+
+  /* El texto de las tarjetas queda sobre una superficie más oscura */
+  .service-card,
+  .testimonial-card {
+    background: rgba(7, 12, 27, 0.94) !important;
+  }
+
+  /* Párrafo principal del hero */
+  .hero-content > p,
+  .hero p {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow:
+      0 1px 4px rgba(0, 0, 0, 1) !important;
+  }
+
+  /* Texto de "Cómo trabajamos" */
+  .split.reverse .split-text > p:not(.section-kicker) {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow:
+      0 1px 4px rgba(0, 0, 0, 1) !important;
+  }
+}
