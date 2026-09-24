@@ -115,4 +115,7 @@
 } 
 .wa-float { 
   animation: wa-breathe 3.4s ease-in-out infinite; 
-} 
+}    
+.marquee-track {
+    animation: marquee 20s linear infinite;
+}
