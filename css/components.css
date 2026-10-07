@@ -887,3 +887,291 @@
       0 1px 4px rgba(0, 0, 0, 1) !important;
   }
 }
+
+/* Textos explicativos que faltaban */
+.split-text .section-kicker,
+.split-text p,
+.gallery-section p,
+.gallery-intro,
+.gallery-description {
+  color: #dce6f5 !important;
+  opacity: 1 !important;
+}
+
+/* Frase: "No enviamos tu carro a otro lado" */
+.split-text p strong,
+.split-text p b,
+.split-text strong,
+.split-text b {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Texto debajo de "Fotos reales de trabajos" */
+.gallery-section p,
+.gallery-intro,
+.gallery-description {
+  color: #dce6f5 !important;
+}
+
+/* CELULAR */
+@media (max-width: 600px) {
+  .split-text p,
+  .gallery-section p,
+  .gallery-intro,
+  .gallery-description {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.95) !important;
+  }
+
+  .split-text p strong,
+  .split-text p b,
+  .split-text strong,
+  .split-text b {
+    color: #ffffff !important;
+  }
+}
+
+/* =========================================================
+   CONTRASTE — TODOS LOS TEXTOS EXPLICATIVOS
+   PC + CELULAR
+   ========================================================= */
+
+/* Párrafos y textos descriptivos */
+p,
+.split-text p,
+.split-text > p,
+.service-card p,
+.testimonial-card p,
+.testimonial-meta,
+.gallery p,
+.gallery-intro,
+.gallery-description,
+.about p,
+.contact p,
+.section-description,
+.section-text,
+.feature-text,
+.process-text,
+.info-text {
+  color: #dce6f5 !important;
+  opacity: 1 !important;
+}
+
+/* Textos importantes dentro de las explicaciones */
+p strong,
+p b,
+.split-text strong,
+.split-text b {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   FRASES / TEXTOS ESPECÍFICOS
+   ========================================================= */
+
+.split-text,
+.split-text p,
+.split-text span,
+.gallery,
+.gallery p,
+.gallery span {
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  p,
+  .split-text p,
+  .split-text > p,
+  .service-card p,
+  .testimonial-card p,
+  .testimonial-meta,
+  .gallery p,
+  .gallery-intro,
+  .gallery-description,
+  .about p,
+  .contact p,
+  .section-description,
+  .section-text,
+  .feature-text,
+  .process-text,
+  .info-text {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.95) !important;
+  }
+
+  p strong,
+  p b,
+  .split-text strong,
+  .split-text b {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+}
+
+/* =========================================================
+   CONTRASTE TOTAL DE TEXTOS
+   TODO MENOS TÍTULOS, SUBTÍTULOS Y BOTONES
+   ========================================================= */
+
+/* Texto normal */
+body {
+  color: #dce6f5;
+}
+
+/* Párrafos y textos descriptivos */
+p,
+li,
+label,
+small,
+span,
+cite,
+strong,
+b,
+figcaption,
+dt,
+dd {
+  opacity: 1 !important;
+}
+
+/* Texto normal */
+p,
+li,
+label,
+small,
+cite,
+figcaption,
+dt,
+dd {
+  color: #dce6f5 !important;
+}
+
+/* Palabras/frases destacadas */
+strong,
+b {
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   BARRAS / LISTAS DE SERVICIOS
+   Transmisión — Frenos — Suspensión — etc.
+   ========================================================= */
+
+.marquee,
+.marquee *,
+.ticker,
+.ticker *,
+.services-bar,
+.services-bar *,
+.service-strip,
+.service-strip *,
+.service-list,
+.service-list * {
+  color: #f1f5fa !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   VALORES
+   Seriedad — Dedicación — Responsabilidad
+   ========================================================= */
+
+.values,
+.values *,
+.value,
+.value *,
+.values-list,
+.values-list *,
+.value-item,
+.value-item * {
+  color: #f1f5fa !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   TARJETAS Y CONTENIDO
+   ========================================================= */
+
+.service-card p,
+.service-card li,
+.testimonial-card p,
+.testimonial-meta,
+.gallery-item span,
+.gallery-item figcaption,
+.split-text p,
+.split-text li,
+.contact p,
+.contact li,
+.about p,
+.about li {
+  color: #dce6f5 !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   TEXTOS DENTRO DE ENLACES
+   ========================================================= */
+
+a:not(.btn) {
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  p,
+  li,
+  label,
+  small,
+  span,
+  cite,
+  figcaption,
+  dt,
+  dd {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9) !important;
+  }
+
+  strong,
+  b {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .marquee *,
+  .ticker *,
+  .services-bar *,
+  .service-strip *,
+  .service-list *,
+  .values *,
+  .values-list *,
+  .value *,
+  .value-item * {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9) !important;
+  }
+
+  .service-card p,
+  .testimonial-card p,
+  .testimonial-meta,
+  .split-text p,
+  .contact p,
+  .about p {
+    color: #f1f5fa !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.95) !important;
+  }
+}

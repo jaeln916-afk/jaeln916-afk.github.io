@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Talleres Juma — scene.js  (v2)
+   Talleres Juma — scene.js  (v3 · más limpio)
    Fondo 3D: tren de engranajes de precisión que engranan de verdad.
 
    - Engranajes con aro dentado, alma rebajada con agujeros de aligeramiento,
@@ -75,7 +75,7 @@
 
   var scene = new THREE.Scene();
   var NAVY = 0x060c2b;
-  scene.fog = new THREE.FogExp2(NAVY, isMobile ? 0.042 : 0.034);
+  scene.fog = new THREE.FogExp2(NAVY, isMobile ? 0.044 : 0.038);
 
   var camera = new THREE.PerspectiveCamera(
     42,
@@ -194,7 +194,7 @@
 
   var steelDark = metalMaterial(0x767e97, 0.4, 1.25);
   var steelLight = metalMaterial(0xc7cde2, 0.3, 1.35);
-  var gunmetal = metalMaterial(0x4a5270, 0.5, 0.95);
+  var gunmetal = metalMaterial(0x434a66, 0.55, 0.62);
   var brass = metalMaterial(0xc19a5b, 0.32, 1.3);
 
   var redAccent = metalMaterial(0xb4131f, 0.38, 1.2);
@@ -451,16 +451,12 @@
   ], 0, !isMobile);
   fg.forEach(function (g) { rig.add(g.holder); });
 
-  // Tren de fondo: más grande, oscuro y lejano (profundidad)
-  var bgA = buildChain([
-    { teeth: 34, thick: 0.7, mat: gunmetal, hubMat: steelDark, holes: 8, x: -9, y: 2.5 },
-    { teeth: 20, thick: 0.6, mat: gunmetal, hubMat: steelDark, holes: 6, parent: 0, theta: -70 }
-  ], -6.5, false);
+  // Fondo: una sola rueda grande, oscura y lejana (profundidad).
+  // El lado izquierdo queda libre para el titular del hero.
   var bgB = buildChain([
-    { teeth: 28, thick: 0.66, mat: gunmetal, hubMat: steelDark, holes: 7, x: 9.5, y: -2.5 },
-    { teeth: 16, thick: 0.56, mat: gunmetal, hubMat: steelDark, holes: 5, parent: 0, theta: 100 }
+    { teeth: 28, thick: 0.66, mat: gunmetal, hubMat: steelDark, holes: 7, x: 9.5, y: -2.5 }
   ], -6.5, false);
-  bgA.concat(bgB).forEach(function (g) { bgRig.add(g.holder); });
+  bgB.forEach(function (g) { bgRig.add(g.holder); });
 
   // ---------------------------------------------------------------------
   // Decoración técnica (estética de plano de ingeniería)
@@ -490,52 +486,26 @@
       g.stroke();
     }
 
-    ring(506, 3, "rgba(170,190,255,0.9)");
-    ring(468, 1.5, "rgba(170,190,255,0.5)");
-    ring(392, 1.5, "rgba(170,190,255,0.4)");
-    ring(300, 1, "rgba(170,190,255,0.25)");
+    // Solo dos anillos: borde exterior y una guía interior muy tenue
+    ring(506, 3, "rgba(170,190,255,0.85)");
+    ring(430, 1.5, "rgba(170,190,255,0.28)");
 
-    for (d = 0; d < 360; d += 2) {
+    // Marcas cada 10°, con una más larga cada 30° (sin numeración)
+    for (d = 0; d < 360; d += 10) {
       a = (d * Math.PI) / 180;
       var major = d % 30 === 0;
-      var mid = d % 10 === 0;
-      var r2 = major ? 450 : mid ? 474 : 490;
+      var r2 = major ? 462 : 486;
       g.beginPath();
       g.moveTo(Math.cos(a) * 506, Math.sin(a) * 506);
       g.lineTo(Math.cos(a) * r2, Math.sin(a) * r2);
       g.lineWidth = major ? 3 : 1.5;
-      g.strokeStyle = major ? "rgba(225,233,255,0.95)" : "rgba(170,190,255,0.6)";
+      g.strokeStyle = major ? "rgba(225,233,255,0.9)" : "rgba(170,190,255,0.5)";
       g.stroke();
     }
 
-    g.fillStyle = "rgba(200,215,255,0.85)";
-    g.font = '600 20px "Courier New", monospace';
-    g.textAlign = "center";
-    g.textBaseline = "middle";
-    for (d = 0; d < 360; d += 30) {
-      g.save();
-      g.rotate((d * Math.PI) / 180 + Math.PI / 2);
-      g.translate(0, -424);
-      g.fillText(String(d), 0, 0);
-      g.restore();
-    }
-
-    // Sectores de color de marca
-    arc(392, -20, 70, 8, "rgba(239,36,48,0.9)");
-    arc(392, 160, 200, 8, "rgba(88,120,255,0.9)");
-    arc(340, 210, 320, 3, "rgba(170,190,255,0.7)");
-    arc(340, 30, 130, 3, "rgba(170,190,255,0.7)");
-
-    // Marcas cardinales interiores
-    for (d = 0; d < 360; d += 90) {
-      a = (d * Math.PI) / 180;
-      g.beginPath();
-      g.moveTo(Math.cos(a) * 300, Math.sin(a) * 300);
-      g.lineTo(Math.cos(a) * 356, Math.sin(a) * 356);
-      g.lineWidth = 2;
-      g.strokeStyle = "rgba(225,233,255,0.8)";
-      g.stroke();
-    }
+    // Dos sectores de color de marca
+    arc(400, -20, 70, 6, "rgba(239,36,48,0.85)");
+    arc(400, 160, 200, 6, "rgba(88,120,255,0.85)");
 
     var tex = new THREE.CanvasTexture(c);
     tex.encoding = THREE.sRGBEncoding;
@@ -561,10 +531,8 @@
     return mesh;
   }
 
-  var dialNear = makeDial(9.6, -0.9, 0.55);
+  var dialNear = makeDial(9.6, -0.9, 0.2);
   rig.add(dialNear);
-  var dialFar = makeDial(26, -11, 0.22);
-  scene.add(dialFar);
 
   // Círculos primitivos (paso) y líneas de centros entre ruedas engranadas
   var guideMat = new THREE.LineBasicMaterial({
@@ -622,7 +590,7 @@
     return tex;
   }
 
-  var PCOUNT = isMobile ? 90 : 220;
+  var PCOUNT = isMobile ? 36 : 80;
   var pPos = new Float32Array(PCOUNT * 3);
   var pCol = new Float32Array(PCOUNT * 3);
   var pX0 = new Float32Array(PCOUNT);
@@ -652,7 +620,7 @@
   pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
   pGeo.setAttribute("color", new THREE.BufferAttribute(pCol, 3));
   var pMat = new THREE.PointsMaterial({
-    size: isMobile ? 0.16 : 0.13,
+    size: isMobile ? 0.14 : 0.11,
     map: buildSpriteTexture(),
     vertexColors: true,
     transparent: true,
@@ -686,15 +654,15 @@
   }
   scene.add(key);
 
-  var fill = new THREE.PointLight(0x3b63ec, 5, 32, 2);
+  var fill = new THREE.PointLight(0x3b63ec, 3.8, 32, 2);
   fill.position.set(-8, 2, 4);
   scene.add(fill);
 
-  var rim = new THREE.PointLight(0xef2430, 4.5, 32, 2);
+  var rim = new THREE.PointLight(0xef2430, 3.2, 32, 2);
   rim.position.set(4, -3, -6);
   scene.add(rim);
 
-  var glint = new THREE.PointLight(0xffe2bd, 3, 24, 2);
+  var glint = new THREE.PointLight(0xffe2bd, 2.2, 24, 2);
   glint.position.set(0, 1, 6);
   scene.add(glint);
 
@@ -733,7 +701,6 @@
   var clock = new THREE.Clock();
   var t = 0;
   var driverFg = 0;
-  var driverA = 0.6;
   var driverB = 2.1;
   var INTRO = reduceMotion ? 0.001 : 3.2;
   var motion = reduceMotion ? 0.25 : 1;
@@ -761,35 +728,35 @@
 
     currentScrollT += (targetScrollT - currentScrollT) * 0.06;
 
+    // Fuera del hero la escena baja de intensidad (hasta ~58%) para que
+    // las secciones de texto se lean limpias sobre el fondo.
+    var calm = clamp01(window.scrollY / (window.innerHeight * 1.1));
+    canvas.style.opacity = (1 - 0.42 * easeOutCubic(calm)).toFixed(3);
+
     // Velocidad de scroll -> acelera / invierte el giro de los engranajes
     var rawVel = dt > 0 ? (targetScrollT - lastTarget) / dt : 0;
     lastTarget = targetScrollT;
     scrollVel += (rawVel - scrollVel) * 0.12;
-    var boost = reduceMotion ? 0 : clampRange(scrollVel * 4.5, -2.0, 2.0);
+    var boost = reduceMotion ? 0 : clampRange(scrollVel * 3, -1.2, 1.2);
 
     driverFg += (0.14 * motion + boost) * dt;
-    driverA -= (0.045 * motion + boost * 0.35) * dt;
     driverB += (0.05 * motion + boost * 0.35) * dt;
 
     updateChain(fg, driverFg);
-    updateChain(bgA, driverA);
     updateChain(bgB, driverB);
 
     // Entrada: las piezas se ensamblan desde fuera y desde atrás
     applyIntro(fg, 0.0, 0.16, 1.7, 6);
-    applyIntro(bgA, 0.5, 0.2, 1.9, 5);
     applyIntro(bgB, 0.7, 0.2, 1.9, 5);
     renderer.toneMappingExposure = reduceMotion
       ? 1.1
       : 0.2 + 0.9 * easeOutCubic(clamp01(t / 2.0));
 
     // Decoración: aparece tras el ensamblado
-    guideMat.opacity = 0.3 * decoIn;
+    guideMat.opacity = 0.13 * decoIn;
     dialNear.material.opacity = dialNear.userData.maxOpacity * decoIn;
-    dialFar.material.opacity = dialFar.userData.maxOpacity * decoIn;
-    pMat.opacity = (0.7 + 0.12 * Math.sin(t * 0.8)) * decoIn;
+    pMat.opacity = (0.36 + 0.06 * Math.sin(t * 0.8)) * decoIn;
     dialNear.rotation.z = -t * 0.04 * motion;
-    dialFar.rotation.z = t * 0.012 * motion;
 
     // Polvo a la deriva
     if (!reduceMotion) {
@@ -810,9 +777,9 @@
     // Cámara: órbita por scroll + dolly de entrada + parallax
     var aspect = camera.aspect;
     var fit = 1 + Math.max(0, 1.25 - aspect) * 0.8;
-    var angle = -0.55 + currentScrollT * 1.4 - (1 - eIntro) * 0.5;
+    var angle = -0.55 + currentScrollT * 1.0 - (1 - eIntro) * 0.5;
     var radius = (13.4 - currentScrollT * 3.2) * fit * (1 + (1 - eIntro) * 0.35);
-    var height = 2.2 - currentScrollT * 4.2;
+    var height = 2.2 - currentScrollT * 3.2;
 
     camera.position.x = Math.sin(angle) * radius + px * 0.9;
     camera.position.z = Math.cos(angle) * radius;
