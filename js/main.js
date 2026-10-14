@@ -72,7 +72,7 @@
 
   const render = k => {
     grid.innerHTML = MENU[k].items.map(([name, text, emoji], i) =>
-      `<article class="dish" style="--i:${i}" data-name="${name}" tabindex="0"><span class="em" aria-hidden="true">${emoji}</span>` +
+      `<article class="dish" style="--i:${i}" data-name="${name}" tabindex="0"><span class="tap" aria-hidden="true">👆 Tócame</span><span class="em" aria-hidden="true">${emoji}</span>` +
       `<h3>${name}</h3><p>${text}</p>` +
       `<a href="https://wa.me/${WA}?text=${encodeURIComponent('Hola Chichamar, quiero pedir: ' + name)}" target="_blank" rel="noopener">Pedir por WhatsApp</a></article>`
     ).join('');
@@ -172,6 +172,53 @@
       else if (!e.shiftKey && d.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
+
+  const mq = $('.marquee');
+  if (mq) {
+    const track = $('.track', mq);
+    const BASE = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : -60;
+    let x = 0, v = BASE, dragging = false, lastX = 0, lastT = 0, visible = true, prev = performance.now();
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(mq);
+    const tick = now => {
+      const dt = Math.min(now - prev, 50) / 1000;
+      prev = now;
+      if (visible) {
+        if (!dragging) {
+          v += (BASE - v) * Math.min(1, dt * 2.5);
+          x += v * dt;
+        }
+        const half = track.scrollWidth / 2;
+        x %= half;
+        if (x > 0) x -= half;
+        track.style.transform = `translate3d(${x}px,0,0)`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    mq.addEventListener('pointerdown', e => {
+      dragging = true;
+      v = 0;
+      lastX = e.clientX;
+      lastT = e.timeStamp;
+      mq.classList.add('grab');
+      mq.setPointerCapture(e.pointerId);
+    });
+    mq.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dt = Math.max(e.timeStamp - lastT, 1) / 1000;
+      const dx = e.clientX - lastX;
+      x += dx;
+      v = v * 0.4 + (dx / dt) * 0.6;
+      lastX = e.clientX;
+      lastT = e.timeStamp;
+    });
+    const end = () => {
+      dragging = false;
+      mq.classList.remove('grab');
+      v = Math.max(-1800, Math.min(1800, v));
+    };
+    ['pointerup', 'pointercancel'].forEach(t => mq.addEventListener(t, end));
+  }
 
   const hero = $('.hero');
   if (hero && matchMedia('(hover: hover) and (pointer: fine)').matches) {
