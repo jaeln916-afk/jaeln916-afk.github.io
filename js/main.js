@@ -29,7 +29,7 @@
 
   const bubbles = $('.bubbles');
   if (bubbles && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < (window.innerWidth < 700 ? 7 : 16); i++) {
       const s = d.createElement('span');
       const z = 10 + Math.random() * 34;
       s.style.cssText = `left:${Math.random() * 100}%;width:${z}px;height:${z}px;` +
@@ -218,6 +218,15 @@
       v = Math.max(-1800, Math.min(1800, v));
     };
     ['pointerup', 'pointercancel'].forEach(t => mq.addEventListener(t, end));
+  }
+
+  const heroCta = $('.hero .cta-row');
+  if (heroCta && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([en]) => {
+      d.body.classList.toggle('fabs-on', !en.isIntersecting && en.boundingClientRect.top < 0);
+    }).observe(heroCta);
+  } else {
+    d.body.classList.add('fabs-on');
   }
 
   const hero = $('.hero');

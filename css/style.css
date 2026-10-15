@@ -56,7 +56,7 @@ a:hover>.round,a.round:hover{transform:translateY(-4px) rotate(-8deg);box-shadow
   background:radial-gradient(60% 55% at 78% 45%,rgba(232,57,29,.34),transparent 70%),radial-gradient(40% 40% at 10% 92%,rgba(255,178,30,.16),transparent 70%),var(--ink)}
 .hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:2rem;width:min(1120px,100% - 2.5rem)}
 h1{font-size:clamp(2.9rem,7.2vw,6rem)}
-h1 span{display:block;animation:rise .9s .7s var(--ease) both}
+h1 span{display:block;text-wrap:balance;animation:rise .9s .7s var(--ease) both}
 h1 .y{color:var(--sun);text-shadow:0 4px 0 var(--ember);animation-delay:.85s}
 .lead{max-width:34rem;margin:1.4rem 0 2rem;font-size:clamp(1.05rem,2.2vw,1.25rem);animation:rise .9s 1s var(--ease) both}
 .cta-row{display:flex;flex-wrap:wrap;gap:.9rem}
@@ -145,7 +145,8 @@ h1 .y{color:var(--sun);text-shadow:0 4px 0 var(--ember);animation-delay:.85s}
 .copy{margin-top:2.5rem;font-size:.85rem;opacity:.6}
 
 /* WhatsApp flotante */
-.fab{position:fixed;z-index:60;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));display:grid;place-items:center;width:var(--fab);height:var(--fab);border-radius:50%;background:var(--wa);color:#06220f;box-shadow:0 10px 28px rgba(0,0,0,.4);transition:transform .35s var(--ease)}
+.fab{position:fixed;z-index:60;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));display:grid;place-items:center;width:var(--fab);height:var(--fab);border-radius:50%;background:var(--wa);color:#06220f;box-shadow:0 10px 28px rgba(0,0,0,.4);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(18px) scale(.8);transition:opacity .35s,visibility .35s,transform .45s var(--ease)}
+.fabs-on .fab{opacity:1;visibility:visible;pointer-events:auto;transform:none}
 .fab .ic{width:32px;height:32px}
 .fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--wa);animation:ring 2.4s ease-out infinite}
 .fab:hover{transform:scale(1.1) rotate(-8deg)}
@@ -208,6 +209,13 @@ body.lock{overflow:hidden}
 }
 @media(max-width:500px){
   body{font-size:1rem}
+  h1{font-size:clamp(2.4rem,10.5vw,3rem)}
+  .hero{padding-bottom:64px}
+  .hero-in{gap:1rem}
+  .hero-logo{width:min(64%,260px)}
+  .lead{margin:1rem auto 1.5rem;font-size:1rem}
+  .chips{display:none}
+  .bubbles span{opacity:.6}
   .brand img{height:44px}
   .hero .cta-row .btn{width:100%}
   .dishes{grid-template-columns:1fr}
