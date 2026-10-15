@@ -10,8 +10,10 @@
   const links = $('#menu');
 
   const progress = $('.progress');
+  const heroEl = $('.hero');
   const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 24);
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    heroEl.style.setProperty('--hp', Math.min(window.scrollY / (window.innerHeight * 0.8), 1).toFixed(3));
     const max = d.documentElement.scrollHeight - window.innerHeight;
     progress.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
   };
@@ -87,7 +89,7 @@
   tabs.innerHTML = keys.map(k => `<button class="tab" type="button" role="tab" id="t-${k}" data-k="${k}">${MENU[k].label}</button>`).join('');
   tabs.addEventListener('click', e => {
     const t = e.target.closest('.tab');
-    if (t) render(t.dataset.k);
+    if (t) { render(t.dataset.k); t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); }
   });
   tabs.addEventListener('keydown', e => {
     const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
